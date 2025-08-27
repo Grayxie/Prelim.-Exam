@@ -1,9 +1,4 @@
 <?php
-// Simula ng PHP script para sa grade calculator
-// Start ng PHP script para sa grade calculator
-
-// Pagsusuri kung may na-submit na form data
-// Checking kung may na-submit na form data
 $result = '';
 $error = '';
 $quiz_score = '';
@@ -13,42 +8,28 @@ $weighted_average = 0;
 $letter_grade = '';
 
 if ($_SERVER['REQUEST_METHOD'] == 'POST') {
-    // Kunin ang mga input values mula sa form
-    // Get ang mga input values mula sa form
     $quiz_score = $_POST['quiz'] ?? '';
     $assignment_score = $_POST['assignment'] ?? '';
     $exam_score = $_POST['exam'] ?? '';
     
-    // I-validate kung lahat ng fields ay filled
-    // Validate kung lahat ng fields ay filled
     if (empty($quiz_score) || empty($assignment_score) || empty($exam_score)) {
-        $error = 'Lahat ng fields ay dapat na may laman. / All fields must be filled.';
+        $error = 'All fields must be filled.';
     }
-    // I-validate kung numeric ang lahat ng inputs
-    // Validate kung numeric ang lahat ng inputs
     elseif (!is_numeric($quiz_score) || !is_numeric($assignment_score) || !is_numeric($exam_score)) {
-        $error = 'Lahat ng scores ay dapat na numero. / All scores must be numeric.';
+        $error = 'All scores must be numeric.';
     }
-    // I-validate kung nasa range ng 0-100 ang lahat ng scores
-    // Validate kung nasa range ng 0-100 ang lahat ng scores
     elseif ($quiz_score < 0 || $quiz_score > 100 || 
             $assignment_score < 0 || $assignment_score > 100 || 
             $exam_score < 0 || $exam_score > 100) {
-        $error = 'Lahat ng scores ay dapat nasa pagitan ng 0 at 100. / All scores must be between 0 and 100.';
+        $error = 'All scores must be between 0 and 100.';
     } else {
-        // I-convert ang strings sa float para sa calculation
-        // Convert ang strings sa float para sa calculation
         $quiz_score = floatval($quiz_score);
         $assignment_score = floatval($assignment_score);
         $exam_score = floatval($exam_score);
         
-        // I-calculate ang weighted average
-        // Calculate ang weighted average
         // Quiz: 30%, Assignment: 30%, Exam: 40%
         $weighted_average = ($quiz_score * 0.30) + ($assignment_score * 0.30) + ($exam_score * 0.40);
         
-        // I-determine ang letter grade base sa grading scale
-        // Determine ang letter grade base sa grading scale
         if ($weighted_average >= 90) {
             $letter_grade = 'A';
         } elseif ($weighted_average >= 80) {
@@ -61,8 +42,6 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
             $letter_grade = 'F';
         }
         
-        // I-format ang result message
-        // Format ang result message
         $grade_emoji = '';
         if ($letter_grade == 'A') $grade_emoji = '🌟';
         elseif ($letter_grade == 'B') $grade_emoji = '👍';
@@ -88,8 +67,6 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
     <title>Grade Calculator</title>
     <link href="https://fonts.googleapis.com/css2?family=Comfortaa:wght@300;400;500;600;700&family=Dancing+Script:wght@400;500;600;700&display=swap" rel="stylesheet">
     <style>
-        /* CSS styling para sa girly cutesy theme */
-        /* CSS styling para sa girly cutesy theme */
         * {
             margin: 0;
             padding: 0;
@@ -691,18 +668,18 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
     </div>
     
     <div class="container">
-        <h1>💖 Cutie Grade Calculator 🌸</h1>
-        <p style="text-align: center; margin-bottom: 30px; font-size: 1.2em; color: #da70d6; font-weight: 600;">🦄 Enter your adorable scores below to calculate your kawaii final grade! 🌈✨</p>
+        <h1>💖 Grade Calculator by Tumpang, Mary Grace E. IT-204 🌸</h1>
+        <p style="text-align: center; margin-bottom: 30px; font-size: 1.2em; color: #da70d6; font-weight: 600;">🦄 Enter your scores below to calculate your final grade! 🌈✨</p>
         
         <div class="weights-info">
-            <h3>🌟 Cutie Grading Weights 🌟</h3>
+            <h3>🌟 Grade Calculator 🌟</h3>
             <p>🎀 Quiz: 30%</p>
             <p>💕 Assignment: 30%</p>
             <p>🌸 Exam: 40%</p>
         </div>
 
         <div class="grading-scale">
-            <h3>🏆 Kawaii Grading Scale 🏆</h3>
+            <h3>🏆 Grading Scale 🏆</h3>
             <ul>
                 <li>🌟 A: 90-100</li>
                 <li>💖 B: 80-89</li>
@@ -722,7 +699,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
                        max="100" 
                        step="0.01" 
                        value="<?php echo htmlspecialchars($quiz_score); ?>"
-                       placeholder="Enter your cutie quiz score! 💕"
+                       placeholder="Enter your quiz score! 💕"
                        required>
             </div>
 
@@ -735,7 +712,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
                        max="100" 
                        step="0.01" 
                        value="<?php echo htmlspecialchars($assignment_score); ?>"
-                       placeholder="Enter your adorable assignment score! 🌸"
+                       placeholder="Enter your assignment score! 🌸"
                        required>
             </div>
 
@@ -748,11 +725,11 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
                        max="100" 
                        step="0.01" 
                        value="<?php echo htmlspecialchars($exam_score); ?>"
-                       placeholder="Enter your kawaii exam score! 🦄"
+                       placeholder="Enter your exam score! 🦄"
                        required>
             </div>
 
-            <button type="submit" class="submit-btn">💖 Calculate My Cutie Grade! 🌈</button>
+            <button type="submit" class="submit-btn">💖 Calculate Grade! 🌈</button>
         </form>
 
         <?php if (!empty($result)): ?>
